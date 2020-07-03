@@ -5,7 +5,7 @@
 body {
     margin: 0;
     margin: auto;
-    width: 70vw;
+    width: 380px;
 }
 
 ul {
@@ -32,7 +32,7 @@ button:active {
 }
 
 header {
-    margin: 2px 250px;
+    /* margin: 2px 250px; */
 }
 
 .logo {

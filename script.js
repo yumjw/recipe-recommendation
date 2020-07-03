@@ -69,7 +69,7 @@ submitBtn.addEventListener('click', (e) => {
                 }
             }
 
-            fetch(`http://3.133.76.141:8000/plus?user_musts=[${send_must.map(x=> `"${x}"`)}]&user_options=[${send_option.map(x=>`"${x}"`)}]`)
+            fetch(`https://3.133.76.141:8000/plus?user_musts=[${send_must.map(x=> `"${x}"`)}]&user_options=[${send_option.map(x=>`"${x}"`)}]`)
             .then(res => {return res.json()})
             .then(datalist => {
                 console.log(datalist)

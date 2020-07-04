@@ -1,15 +1,15 @@
 const typeEl = document.getElementById('type')
 const addBtn = document.getElementById('add')
-
+const resulttitle = document.querySelector('.resulttitle')
 const ingredientUl = document.getElementById('ingredient-ul')
 const notification = document.getElementById('notify')
 const submitBtn = document.getElementById('submit')
-const result = document.querySelector('.result')
-const recimg = document.getElementsByTagName('img')
+const resultContainer = document.getElementById('result-container')
 
-const ing_inbox = document.getElementsByClassName('ingredient');
-// const ing_must = document.g
 
+const loader = document.getElementById('loader')
+
+loader.style.display = 'none';
 
 //엔터치면 추가 클릭
 typeEl.addEventListener('keydown', (e) => {
@@ -18,16 +18,6 @@ typeEl.addEventListener('keydown', (e) => {
     }
 })
 
-// new autoComplete({
-//     selector: typeEl,
-//     minChar: 1,
-//     source: function(term, suggest) {
-//         const matches = inglist.filter(ing => {
-//             return ing.includes(term)
-//         })
-//         suggest(matches)
-//     }
-// })
 
 //추가버튼 누르면 재료 들어감
 addBtn.addEventListener('click', () => {
@@ -68,20 +58,34 @@ submitBtn.addEventListener('click', (e) => {
                     send_option.push(arrValue)
                 }
             }
+            resultContainer.innerHTML = ''
+            loader.style.display = 'block'
 
             fetch(`http://3.133.76.141:10001/plus?user_musts=[${send_must.map(x=> `"${x}"`)}]&user_options=[${send_option.map(x=>`"${x}"`)}]`)
             .then(res => {return res.json()})
             .then(datalist => {
-                console.log(datalist)
+                loader.style.display='none'
+
+                if(Object.keys(datalist).length===0){
+                    resultContainer.innerHTML='<div></div><img src="https://1.gall-img.com/hygall/files/attach/images/82/338/473/273/c2acce0288e9e105d72e0ecab5aa99a8.jpg">'
+                    return
+                }
+                resultContainer.innerHTML = `<h1 class="resulttitle" id="resulttitle">레시피 결과</h1>
+                <div class="result" id='result'>
+
+                </div>`
+                const result = document.getElementById('result')
                 for (let data in datalist){
                 result.innerHTML += `
                 <div class="rec">
                     <a href="${datalist[data].recipe_url}"><img src="${datalist[data].image_url}" alt="image">
                     </a>
-                    <div class="title">${datalist[data].title}</div>
+                    <p class="title">${datalist[data].title}</p>
                     <div class="idonthave">&#x274C${datalist[data].required_ingredients}</div>
                 </div>`
                 }
+
+                location.href = "#resulttitle"
             })
             .catch(err=>{return console.log(err)})
     

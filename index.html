@@ -17,7 +17,7 @@
         </div>
         <div class="container">
             <div class="search">
-                <input id="type" type="text" placeholder="필수 재료를 입력하세요.">
+                <input id="type" type="text" placeholder="필수 재료를 입력하세요." autofocus>
                 <button id="add">추가</button>
             </div>
             <div class="notify" id="notify"></div>
@@ -31,9 +31,10 @@
 
         </div>
     </header>
-    <main>
-        <div class="result">
 
+    <main>
+        <div class="loader" id="loader"></div>
+        <div class="result-container" id="result-container">
         </div>
 
     </main>

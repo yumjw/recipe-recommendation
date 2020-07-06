@@ -1,4 +1,6 @@
-from PIL import Image, ImageDraw, Image, ImageFont
+#referred to Jie Jenn's code on his youtube video
+
+from PIL import Image, ImageDraw, Image, ImageFont #pip install Pillow
 
 
 def draw_borders(pillow_image, bounding, color, image_size, caption = '', confidence_score=0):
